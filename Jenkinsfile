@@ -13,7 +13,7 @@ pipeline {
       steps{
         withEnv(readFile('version.txt').split('\n') as List){
           script{
-            if(${NOME}){
+            if(params.NOME){
               env.FRONT_END="test:7cfd8fa"
             }
           }
