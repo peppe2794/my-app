@@ -1,54 +1,20 @@
 pipeline {
-  environment {
-    registry = "peppe2794/test"
-    registryCredential = 'dockerhub'
-    dockerImage = ''
-    DOCKER_TAG = getVersion().trim()
-  }
   tools{
     terraform 'terraform'
   }
   agent any
-  stages {
-    stage('Building image') {
+  stages{
+    stage('Provisioning'){
       steps{
-        script {
-          dockerImage = docker.build("$registry:$DOCKER_TAG")
-        }
+         echo "PROVISIONING"
       }
     }
-    stage('Push Image') {
+    stage('Deploy'){
       steps{
-        script {
-          docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
+        withEnv(readFile('version.txt').split('\n') as List){
+          ansiblePlaybook credentialsId: 'node', disableHostKeyChecking: true, extras: "-e FRONT_END=${env.FRONT_END} EDGE_ROUTER=${env.EDGE_ROUTER} CATALOGUE_DB=${env.CATALOGUE_DB} CATALOGUE=${env.CATALOGUE} CARTS=${env.CARTS} CARTS_DB=${env.CARTS_DB} ORDERS=${env.ORDERS} ORDERS_DB=${env.ORDERS_DB} SHIPPING=${env.SHIPPING} QUEUE_MASTER=${env.QUEUE_MASTER}  RABBIT_MQ =${env.RABBIT_MQ} PAYMENT=${env.PAYMENT} USER=${env.USER} USER_DB=${env.USER_DB} ", installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'deploy_app.yml'         
+        }     
       }
     }
-    stage ('Provisioning with ANSIBLE'){
-      steps{
-        ansiblePlaybook become: true, credentialsId: 'pve', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'provisioning.yml'
-      }
-    }
-    stage('Provisioning with TERRAFORM - Init'){
-        steps{
-            sh label: '', script: 'terraform init'
-        }
-    }
-    stage('Provisioning with TERRAFORM - Apply'){
-        steps{
-            sh label: '', script: 'terraform apply --auto-approve'
-        }
-    }
-    stage('Deploy Image') {
-      steps{
-        ansiblePlaybook credentialsId: 'node', disableHostKeyChecking: true, extras: "-e DOCKER_TAG=${DOCKER_TAG}", installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Deploy-docker.yaml'
-      }
-    }
- }
-}
-def getVersion(){
-  def commitHash = sh returnStdout: true, script: 'git rev-parse --short HEAD'
-  return commitHash
+  }
 }
