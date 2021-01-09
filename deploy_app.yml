@@ -129,7 +129,7 @@
     - name: Start CARTS-DB service
       docker_container:
         name: carts-db
-        image: "CARTS_DB"
+        image: "{{CARTS_DB}}"
         state: started
         hostname: carts-db
         capabilities:
@@ -147,7 +147,7 @@
     - name: Start ORDERS-DB service
       docker_container:
         name: orders-db
-        image: "ORDERS_DB"
+        image: "{{ORDERS_DB}}"
         state: started
         hostname: orders-db
         capabilities:
