@@ -11,8 +11,9 @@ pipeline {
     }
     stage('Deploy'){
       steps{
-        withEnv(readFile('version.txt').split('\n') as List){
+        withEnv("ENV_USERNAME=ciao"){
           script{
+            load "version.txt"
             if(params.NOME){
               env.FRONT_END="test:7cfd8fa"
             }
