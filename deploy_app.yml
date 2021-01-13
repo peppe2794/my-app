@@ -1,9 +1,10 @@
 ---
-- name: wiat
-  wait_for_connection:
 - hosts: VM
   become: True
   tasks:
+    - name: wiat
+      wait_for_connection:
+      
     - name: Install aptitude using apt
       apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
 
