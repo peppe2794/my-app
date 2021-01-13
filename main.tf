@@ -20,7 +20,6 @@ resource "proxmox_vm_qemu" "proxmox_vm" {
   name              = "tf-vm"
   target_node       = "pve"
   clone             = "deployTemplate"
-  preprovision = false
   memory = 8192
   cores = "4"
   cpu = "kvm64"
@@ -28,7 +27,6 @@ resource "proxmox_vm_qemu" "proxmox_vm" {
   pool = "Tesi_Zagaria"
   define_connection_info = false
   clone_wait = 60
-  additional_wait = 30
 
 disk {
   backup       = false
