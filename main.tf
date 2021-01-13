@@ -26,7 +26,7 @@ resource "proxmox_vm_qemu" "proxmox_vm" {
   full_clone = "false"
   pool = "Tesi_Zagaria"
   define_connection_info = false
-  clone_wait = 60
+  
 
 disk {
   backup       = false
