@@ -1,5 +1,5 @@
 ---
-- hosts: dev
+- hosts: VM
   become: True
   tasks:
     - name: Install aptitude using apt
