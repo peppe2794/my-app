@@ -1,4 +1,6 @@
 ---
+- name: wiat
+  wait_for_connection:
 - hosts: VM
   become: True
   tasks:
