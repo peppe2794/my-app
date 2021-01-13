@@ -1,4 +1,3 @@
-
 terraform {
   required_providers {
     proxmox = {
@@ -8,29 +7,37 @@ terraform {
   }
 }
 provider "proxmox" {
-    pm_api_url = "https://192.168.1.99:8006/api2/json"
-    pm_user = "root@pam"
-    pm_password = "27942794"
+    pm_api_url = "https://10.224.16.41:8006/api2/json"
     pm_tls_insecure = "true"
+    pm_log_enable = "true"
+    pm_log_levels = {
+     _default = "debug"
+     _capturelog = ""
+    }
 }
 resource "proxmox_vm_qemu" "proxmox_vm" {
   count             = 1
   name              = "tf-vm"
   target_node       = "pve"
-  clone             = "deploy"
-  os_type           = "cloud-init"
-  cores             = "1"
-  sockets           = "1"
-  cpu               = "kvm64"
-  memory            = 3072
-  scsihw            = "virtio-scsi-pci"
-  bootdisk          = "virtio0"
-  hotplug = "network,disk,usb"
-   disk {
-        size = "10G"
-        type = "virtio"
-        storage = "local-lvm"
-    }
-ipconfig2 = "ip=192.168.1.114/24,gw=192.168.1.1"
+  clone             = "deployTemplate"
+  preprovision = false
+  memory = 8192
+  cores = "4"
+  cpu = "kvm64"
+  full_clone = "false"
+  pool = "Tesi_Zagaria"
+  define_connection_info = false
+  clone_wait = 30
+
+disk {
+  backup       = false
+  cache        = "none"
+  iothread     = false
+  replicate    = false
+  size         = "22732M"
+  slot         = 0
+  ssd          = false
+  storage      = "nas_storage"
+  type         = "scsi"
+}
  }
- 
