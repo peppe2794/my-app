@@ -15,6 +15,7 @@ pipeline {
     }
     stage('Static Assessment Provisioned Environment'){
       steps{
+        sh label: '', script: 'terraform init'
       }
     }
     stage('Deploy'){
