@@ -19,7 +19,7 @@ resource "proxmox_vm_qemu" "proxmox_vm" {
   count             = 1
   name              = "tf-vm"
   target_node       = "pve"
-  clone             = "deployTemplate"
+  clone             = "prova"
   memory = 8192
   cores = "4"
   cpu = "kvm64"
