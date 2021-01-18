@@ -9,14 +9,13 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'Proxmox', passwordVariable: 'PASSWORD', usernameVariable: 'USER')]) {
           sh label: '', script: 'terraform init'
           sh label: '', script: 'export PM_USER=${USER}; export PM_PASS=${PASSWORD}; terraform apply --auto-approve'
-          sh 'sleep 100'
+          sh 'sleep 60'
         }
       }
     }
     stage('Static Assessment Provisioned Environment'){
       steps{
-        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'oscap_assessment.yml'
-        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'inspec_assessment.yml'
+        sh 'ciao'
       }
     }
     stage('Deploy'){
