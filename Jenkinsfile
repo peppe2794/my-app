@@ -15,7 +15,8 @@ pipeline {
     }
     stage('Static Assessment Provisioned Environment'){
       steps{
-        sh 'echo ciao'
+        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'oscap_assessment.yml'
+        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'inspec_assessment.yml'
       }
     }
     stage('Deploy'){
