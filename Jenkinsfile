@@ -15,7 +15,7 @@ pipeline {
     }
     stage('Static Assessment Provisioned Environment'){
       steps{
-        sh 'ciao'
+        sh 'echo ciao'
       }
     }
     stage('Deploy'){
