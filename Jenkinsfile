@@ -24,5 +24,11 @@ pipeline {
         }
       }    
     }
+    stage('Static Assessment'){
+      steps{
+        ansiblePlaybook credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'inspec_assessment.yml'  
+        ansiblePlaybook credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'oscap_assessment.yml'  
+      }
+    }
   }
 }
