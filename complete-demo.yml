@@ -85,9 +85,6 @@ spec:
         securityContext:
           runAsNonRoot: true
           runAsUser: 10001
-          capabilities:
-            drop:
-              - all
           readOnlyRootFilesystem: true
         volumeMounts:
         - mountPath: /tmp
