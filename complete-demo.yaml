@@ -228,7 +228,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: weaveworksdemos/$FRONT_END
+        image: peppe2794/$FRONT_END
         resources:
           requests:
             cpu: 100m
