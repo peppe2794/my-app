@@ -24,7 +24,7 @@ pipeline {
           if(params.FRONT_END){
             env.FRONT_END=params.FRONT_END
           }
-         kubernetesDeploy configs: 'namespaces.yaml, complete-demo.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubconf', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']        
+         kubernetesDeploy configs: '/manifest/namespaces.yaml, /manifest/deplyments.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubconf', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']        
         }
       }    
     }
