@@ -1,3 +1,7 @@
+variable "ip_list"{
+  type = list
+  default = ["192.168.6.188","192.168.6.189"]
+  }
 terraform {
   required_providers {
     proxmox = {
