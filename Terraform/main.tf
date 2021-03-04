@@ -33,6 +33,6 @@ ipconfig0 = "ip=${var.ip_list[count.index]}/24,gw=192.168.6.1"
 disk {
   size         = "32732M"
   type         = "scsi"
-  storage      = "nas_storage"
+  storage      = "SecondStorageThin"
 }
  }
