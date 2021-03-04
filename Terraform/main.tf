@@ -31,14 +31,7 @@ resource "proxmox_vm_qemu" "proxmox_vm" {
   
 ipconfig0 = "ip=${var.ip_list[count.index]}/24,gw=192.168.6.1"
 disk {
-  backup       = false
-  cache        = "none"
-  iothread     = false
-  replicate    = false
   size         = "32732M"
-  slot         = 0
-  ssd          = false
-  storage      = "nas_storage"
   type         = "scsi"
 }
  }
