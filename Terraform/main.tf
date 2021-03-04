@@ -16,24 +16,22 @@ provider "proxmox" {
     }
 }
 resource "proxmox_vm_qemu" "proxmox_vm" {
-  count             = 1
-  name              = "tf-vm"
+  count             = 2
+  name              = "node${count.index}"
   target_node       = "pve"
-  clone             = "Template"
+  clone             = "Tesi.Zagaria.KubMaster"
   memory = 8192
-  cores = "4"
-  cpu = "kvm64"
-  full_clone = "false"
+  cores = "6"
   pool = "Tesi_Zagaria"
   define_connection_info = false
   
-
+ipconfig0 = "ip=${var.ip_list[count.index]}/24,gw=192.168.6.1"
 disk {
   backup       = false
   cache        = "none"
   iothread     = false
   replicate    = false
-  size         = "22732M"
+  size         = "32732M"
   slot         = 0
   ssd          = false
   storage      = "nas_storage"
