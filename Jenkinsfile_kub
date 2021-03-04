@@ -24,7 +24,8 @@ pipeline {
           if(params.FRONT_END){
             env.FRONT_END=params.FRONT_END
           }
-         kubernetesDeploy configs: 'manifest/namespaces.yaml, manifest/deployments.yaml, manifest/kaliDeployments.yml', kubeConfig: [path: ''], kubeconfigId: 'kubconf', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']        
+         kubernetesDeploy configs: 'manifest/namespaces.yaml', kubeConfig: [path: ''], kubeconfigId: 'kubconf', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']        
+         kubernetesDeploy configs: 'manifest/deployments.yaml, manifest/kaliDeployments.yml', kubeConfig: [path: ''], kubeconfigId: 'kubconf', secretName: '', ssh: [sshCredentialsId: '*', sshServer: ''], textCredentials: [certificateAuthorityData: '', clientCertificateData: '', clientKeyData: '', serverUrl: 'https://']        
         }
       }    
     }
