@@ -16,11 +16,7 @@ pipeline {
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
         withCredentials([usernamePassword(credentialsId: 'GITHUB', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-          sh 'git config --global user.mail "user@test.com"'
-          sh 'git config --global user.name "Jenkins"'
-          sh 'git config --global push.default simple'
-          sh('git add Ansible/192.168.6.97/tmp/report.html')
-          sh('git commit -m "prova"')
+          sh('git config --global user.mail "user@test.com"; git config --global user.name "Jenkins"; git config --global push.default simple; git add Ansible/192.168.6.97/tmp/report.html; git commit -m "prova"')
           sh('git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/peppe2794/socks_application.git')
         }
       }
