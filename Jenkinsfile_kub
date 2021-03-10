@@ -18,7 +18,7 @@ pipeline {
         withCredentials([usernamePassword(credentialsId: 'GITHUB', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           sh 'git config --global user.name "peppe2794"'
           sh 'git config --global user.mail "peppe2794@gmail.com"'
-          sh 'git remote set-url origin "https://peppe2794:Peppe.2794/socks_application.git"'
+          sh 'git remote set-url origin "https://peppe2794:Peppe.2794/peppe2794/socks_application.git"'
           sh 'git add Ansible/192.168.6.97/tmp/report.html'
           sh 'git commit -m "ciao"'
           sh 'git push origin HEAD:main'
