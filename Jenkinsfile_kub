@@ -15,11 +15,6 @@ pipeline {
       steps{
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
-        sshagent (credentials: ['keygit']) {
-        sh('git add Ansible/192.168.6.97/tmp/repot.html')
-        sh('git commit -m "daily backup of ranger-policies/policies.json"')
-        sh('git push git@github.com:username/reponame.git')
-    }
       }
     }
     stage('Deploy'){
