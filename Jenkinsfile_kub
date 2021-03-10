@@ -16,7 +16,7 @@ pipeline {
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
         withCredentials([usernamePassword(credentialsId: 'GITHUB', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-          sh('git add ciao')
+          sh('git add Ansible/192.168.6.97/tmp/report.html')
           sh('git commit -m "ciao"')
           sh('git commit push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/socks_application.git')
         }
