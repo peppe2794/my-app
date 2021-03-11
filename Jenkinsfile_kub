@@ -15,14 +15,16 @@ pipeline {
       steps{
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
         ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
+        
         withCredentials([usernamePassword(credentialsId: 'GITHUB', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
           sh 'git config --global user.name "peppe2794"'
           sh 'git config --global user.mail "peppe2794@gmail.com"'
-          sh 'git remote set-url origin "https://peppe2794:Peppe.2794@github.com/peppe2794/socks_application.git"'
+          sh 'git remote set-url origin "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/peppe2794/socks_application.git"'
           sh 'git add Results/*'
-          sh 'git commit -m "ciao"'
+          sh 'git commit -m "Add report File"'
           sh 'git push origin HEAD:main'
         }
+        
       }
     }
     stage('Deploy'){
