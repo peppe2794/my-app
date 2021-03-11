@@ -20,6 +20,7 @@ pipeline {
           sh 'git config --global user.name "peppe2794"'
           sh 'git config --global user.mail "peppe2794@gmail.com"'
           sh 'git remote set-url origin "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/peppe2794/socks_application.git"'
+          sh 'echo ${GIT_USERNAME}'
           sh 'git add Results/*'
           sh 'git commit -m "Add report File"'
           sh 'git push origin HEAD:main'
