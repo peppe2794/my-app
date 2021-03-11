@@ -16,5 +16,5 @@
       - result.rc == 1
   
   - fetch:
-      src: /tmp/report.html
-      dest: ./
+      src: /tmp/oscap_report.html
+      dest: ../Results/
