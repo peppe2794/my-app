@@ -13,14 +13,14 @@ pipeline {
     }
     stage('Static Assessment Provisioned Environment'){
       steps{
-        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
-        ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
+        //ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/oscap_assessment_kub.yml'
+        //ansiblePlaybook become: true, credentialsId: 'node', disableHostKeyChecking: true, installation: 'ansible', inventory: '/etc/ansible/hosts', playbook: 'Ansible/inspec_assessment_kub.yml'
         
         withCredentials([usernamePassword(credentialsId: 'GIT', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-          sh 'git remote set-url origin "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/peppe2794/${JOB_NAME}.git"'
-          sh 'git add Results/*'
-          sh 'git commit -m "Add report File"'
-          sh 'git push origin HEAD:main'
+          //sh 'git remote set-url origin "https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/peppe2794/${JOB_NAME}.git"'
+          //sh 'git add Results/*'
+          //sh 'git commit -m "Add report File"'
+          //sh 'git push origin HEAD:main'
         }
         
       }
