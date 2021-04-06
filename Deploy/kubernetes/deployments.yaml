@@ -74,7 +74,7 @@ spec:
     spec:
       containers:
       - name: carts
-        image: weaveworksdemos/$CARTS
+        image: $CARTS
         ports:
          - containerPort: 80
         env:
@@ -135,7 +135,7 @@ spec:
     spec:
       containers:
       - name: catalogue-db
-        image: weaveworksdemos/$CATALOGUE_DB
+        image: $CATALOGUE_DB
         env:
           - name: MYSQL_ROOT_PASSWORD
             value: fake_password
@@ -181,7 +181,7 @@ spec:
     spec:
       containers:
       - name: catalogue
-        image: weaveworksdemos/$CATALOGUE
+        image: $CATALOGUE
         ports:
         - containerPort: 80
         securityContext:
@@ -228,7 +228,7 @@ spec:
     spec:
       containers:
       - name: front-end
-        image: peppe2794/$FRONT_END
+        image: $FRONT_END
         resources:
           requests:
             cpu: 100m
@@ -337,7 +337,7 @@ spec:
     spec:
       containers:
       - name: orders
-        image: weaveworksdemos/$ORDERS
+        image: $ORDERS
         env:
          - name: ZIPKIN
            value: zipkin.jaeger.svc.cluster.local
@@ -398,7 +398,7 @@ spec:
     spec:
       containers:
       - name: payment
-        image: weaveworksdemos/$PAYMENT
+        image: $PAYMENT
         ports:
         - containerPort: 80
         securityContext:
@@ -447,7 +447,7 @@ spec:
     spec:
       containers:
       - name: queue-master
-        image: weaveworksdemos/$QUEUE_MASTER
+        image: $QUEUE_MASTER
         ports:
         - containerPort: 80
       nodeSelector:
@@ -539,7 +539,7 @@ spec:
     spec:
       containers:
       - name: shipping
-        image: weaveworksdemos/$SHIPPING
+        image: $SHIPPING
         env:
          - name: ZIPKIN
            value: zipkin.jaeger.svc.cluster.local
@@ -600,7 +600,7 @@ spec:
     spec:
       containers:
       - name: user-db
-        image: weaveworksdemos/$USER_DB
+        image: $USER_DB
         ports:
         - name: mongo
           containerPort: 27017
@@ -657,7 +657,7 @@ spec:
     spec:
       containers:
       - name: user
-        image: weaveworksdemos/$USER
+        image: $USER
         ports:
         - containerPort: 80
         env:
